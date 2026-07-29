@@ -3,15 +3,18 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
     private final By loginInput = By.xpath("//*[@id='user-name']");
     private final By passwordInput = By.cssSelector("#password");
     private final By loginBtn = By.cssSelector("[id='login-button']");
-    private final By errorMassage = By.cssSelector("h3[data-test='error']");
-    WebDriver driver;
+    private final By error = By.cssSelector("[data-test='error']");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super (driver);
+    }
+
+    public void open() {
+        driver.get(BASE_URL);
     }
 
     public void login(final String userName, final String password) {
@@ -20,7 +23,10 @@ public class LoginPage {
         driver.findElement(loginBtn).click();
     }
 
-    public String getErrorMessageText() {
-        return driver.findElement(errorMassage).getText();
+    public boolean isErrorDisplayed() {
+        return driver.findElement(error).isDisplayed();
+    }
+    public String getErrorText() {
+        return driver.findElement(error).getText();
     }
 }

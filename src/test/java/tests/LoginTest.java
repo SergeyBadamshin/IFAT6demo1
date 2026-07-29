@@ -1,46 +1,40 @@
 package tests;
 
-import org.openqa.selenium.By;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(priority = 1)
     public void correctLoginAndPassword() {
+        loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        String nameOfNewPage = driver.findElement(By.xpath("//span[@data-test='title']")).getText();
-        assertEquals(nameOfNewPage, "Products");
+        boolean titleDisplayed = productsPage.pageIsOpen();
+        assertTrue(titleDisplayed);
+        assertEquals(productsPage.getNamePage(), "Products",
+                "Name of the page doesn't correspond to te expected");
     }
 
-    @Test
-    public void lockedUserLogin() {
-        loginPage.login("locked_out_user", "secret_sauce");
-        assertEquals(loginPage.getErrorMessageText(), "Epic sadface: Sorry, this user has been locked out.");
+    @DataProvider()
+    public Object[][] loginData() {
+        return new Object[][] {
+                {"Standard_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"},
+                {"standard_user", "standard_user", "Epic sadface: Username and password do not match any user in this service"},
+                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"", "", "Epic sadface: Username is required"}
+        };
     }
 
-    @Test
-    public void emptyUserLogin() {
-        loginPage.login("", "secret_sauce");
-        assertEquals(loginPage.getErrorMessageText(), "Epic sadface: Username is required");
-    }
-
-    @Test
-    public void emptyPasswordLogin() {
-        loginPage.login("standard_user", "");
-        assertEquals(loginPage.getErrorMessageText(), "Epic sadface: Password is required");
-    }
-
-    @Test
-    public void wrongPasswordLogin() {
-        loginPage.login("standard_user", "standard_user");
-        assertEquals(loginPage.getErrorMessageText(), "Epic sadface: Username and password do not match any user in this service");
-    }
-
-    @Test
-    public void emptyUserAndPasswordLogin() {
-        loginPage.login("", "secret_sauce");
-        assertEquals(loginPage.getErrorMessageText(), "Epic sadface: Username is required");
+    @Test(priority = 2, dataProvider = "loginData")
+    public void incorrectLogin(String user, String password, String errorMsg) {
+        loginPage.open();
+        loginPage.login(user, password);
+        assertTrue(loginPage.isErrorDisplayed());
+        assertEquals(loginPage.getErrorText(), errorMsg);
     }
 }
