@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProductsPage extends BasePage {
-    private final By pageName = getByDataTest("title");
     private static final String ADD_TO_CART = "//*[text()='%s']//ancestor::div" +
             "[@class='inventory_item']//child::*[text()='Add to cart']";
+    private final By pageName = getByDataTest("title");
     private final By counter = getByDataTest("shopping-cart-badge");
     private final By cartIcon = getByDataTest("shopping-cart-link");
     private final By addToCartBtn = By.xpath("//*[text()='Add to cart']");
