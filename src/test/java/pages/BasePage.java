@@ -8,7 +8,12 @@ import java.time.Duration;
 
 public class BasePage {
     public static final String BASE_URL = "https://www.saucedemo.com/";
-    private final By pageName = By.cssSelector("[data-test='title']");
+    public static final String DATA_TEST = "[data-test='%s']";
+    private final By pageName = getByDataTest("title");
+
+    public By getByDataTest(String dataTest) {
+        return By.cssSelector(DATA_TEST.formatted(dataTest));
+    }
 
     WebDriver driver;
     WebDriverWait wait;
