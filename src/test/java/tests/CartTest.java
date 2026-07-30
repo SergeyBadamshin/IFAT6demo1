@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
+import user.UserFactory;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class CartTest extends BaseTest {
     @Test
     public void checkGoodsAdded() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(UserFactory.withAdminPermission());
         for (String goodName : goodsList) {
             productsPage.addToCart(goodName);
         }
