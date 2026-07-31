@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+
 import java.time.Duration;
 
 public class BaseTest {
@@ -21,7 +22,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--guest");
         options.addArguments("start-maximized");
-        options.addArguments("headless");
+        options.addArguments("--headless=new");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(7));
         loginPage = new LoginPage(driver);

@@ -14,7 +14,7 @@ public class LoginTest extends BaseTest {
     public void correctLoginAndPassword() {
         loginPage.open();
         loginPage.login(UserFactory.withAdminPermission());
-        assertTrue(productsPage.pageIsOpen(), "Страница Product не открылась");
+        assertTrue(productsPage.pageIsOpen(), "Страница Products не открылась");
         assertEquals(productsPage.getNamePage(), "Products",
                 "Name of the page doesn't correspond to te expected");
     }

@@ -19,7 +19,7 @@ public class ProductsTest extends BaseTest {
     public void checkGoodsAdded() {
         loginPage.open();
         loginPage.login(UserFactory.withAdminPermission());
-        assertTrue(productsPage.pageIsOpen(), "Страница Product не открылась");
+        assertTrue(productsPage.pageIsOpen(), "Страница Products не открылась");
         productsPage.addToCart(0);
         for (String goodName : goodsList) {
             productsPage.addToCart(goodName);
