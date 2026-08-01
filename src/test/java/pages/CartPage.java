@@ -13,7 +13,8 @@ public class CartPage extends BasePage {
     }
 
     public ArrayList<String> getProductsNames() {
-        List<WebElement> allProductsNames = driver.findElements(By.cssSelector(".inventory_item_name"));
+        List<WebElement> allProductsNames = driver.findElements
+                (By.cssSelector(DATA_TEST_PATTERN.formatted("inventory-item-name")));
         ArrayList<String> names = new ArrayList<>();
 
         for (WebElement productBlock : allProductsNames) {
