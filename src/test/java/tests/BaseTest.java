@@ -1,6 +1,7 @@
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -39,7 +40,8 @@ public class BaseTest {
         cartPage = new CartPage(driver);
     }
 
-    @AfterMethod
+    @Step("Закрытие браузера")
+    @AfterMethod(alwaysRun = true)
     public void close() {
         driver.quit();
     }

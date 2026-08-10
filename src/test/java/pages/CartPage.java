@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,7 @@ public class CartPage extends BasePage {
         super(driver);
     }
 
+    @Step("Получить список наименований товаров в корзине")
     public ArrayList<String> getProductsNames() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(DATA_TEST_PATTERN.formatted("inventory-item-name"))));
         List<WebElement> allProductsNames = driver.findElements
