@@ -5,6 +5,8 @@ import user.UserFactory;
 
 import java.util.List;
 
+import static enums.TitleNaming.CART;
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.*;
 
 public class CartTest extends BaseTest {
@@ -15,12 +17,22 @@ public class CartTest extends BaseTest {
 
     @Test
     public void checkGoodsAdded() {
+        System.out.println("CartTest.checkGoodsAdded running in thread: " + Thread.currentThread().getId());
+
         loginPage.open();
         loginPage.login(UserFactory.withAdminPermission());
+        assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
+                "Name of the page doesn't correspond to the expected");
         for (String goodName : goodsList) {
             productsPage.addToCart(goodName);
         }
         productsPage.switchToCart();
+        assertEquals(productsPage.getNamePage(), CART.getDisplayName(),
+                "Name of the page doesn't correspond to the expected");
+
+        assertFalse(cartPage.getProductsNames().isEmpty());
+        assertEquals(cartPage.getProductsNames().size(), 3);
+        assertTrue(cartPage.getProductsNames().contains("Sauce Labs Bolt T-Shirt"));
         assertEquals(cartPage.getProductsNames(), goodsList);
     }
 }

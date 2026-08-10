@@ -26,22 +26,4 @@ public class UserFactory {
                 PropertyReader.getProperty("saucedemo.locked_user_name"),
                 PropertyReader.getProperty("saucedemo.correct_password"));
     }
-
-    public static User withEmptyUsername() {
-        return new User(
-                PropertyReader.getProperty("saucedemo.empty"),
-                PropertyReader.getProperty("saucedemo.correct_password"));
-    }
-
-    public static User withEmptyPassword() {
-        return new User(
-                PropertyReader.getProperty("saucedemo.admin_user_name"),
-                PropertyReader.getProperty("saucedemo.empty"));
-    }
-
-    public static User withEmptyUsernameAndPassword() {
-        return new User(
-                PropertyReader.getProperty("saucedemo.empty"),
-                PropertyReader.getProperty("saucedemo.empty"));
-    }
 }

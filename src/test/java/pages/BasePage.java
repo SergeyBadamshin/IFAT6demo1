@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyReader;
 
@@ -22,6 +24,10 @@ public class BasePage {
     }
 
     public boolean pageIsOpen() {
-        return driver.findElement(pageName).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(pageName)).isDisplayed();
+    }
+
+    public String getNamePage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(pageName)).getText();
     }
 }
