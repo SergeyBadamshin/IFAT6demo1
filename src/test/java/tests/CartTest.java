@@ -1,5 +1,8 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import user.UserFactory;
 
@@ -9,12 +12,15 @@ import static enums.TitleNaming.CART;
 import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.*;
 
+@Epic("Интернет-магазин")
+@Feature("Корзина")
 public class CartTest extends BaseTest {
     List<String> goodsList =
             List.of("Sauce Labs Backpack",
                     "Sauce Labs Bike Light",
                     "Sauce Labs Bolt T-Shirt");
 
+    @Story("Добавление 3-х товаров в корзину")
     @Test
     public void checkGoodsAdded() {
         System.out.println("CartTest.checkGoodsAdded running in thread: " + Thread.currentThread().getId());

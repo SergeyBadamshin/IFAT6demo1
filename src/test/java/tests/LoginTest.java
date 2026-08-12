@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import user.User;
@@ -9,9 +10,15 @@ import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+@Epic("Интернет-магазин")
+@Feature("Авторизация")
+@Owner("Бадамшин Сергей sergeybadms@gmail.com")
 public class LoginTest extends BaseTest {
 
+    @Story("Удачная авторизация")
     @Test(priority = 1)
+    @Severity(SeverityLevel.BLOCKER)
+    @TmsLink("IFAT6demo1")
     public void correctLoginAndPassword() {
         System.out.println("LoginTest.correctLogin running in thread: " + Thread.currentThread().getId());
         loginPage.open();
@@ -32,7 +39,9 @@ public class LoginTest extends BaseTest {
         };
     }
 
+    @Story("Неудачная авторизация")
     @Test(priority = 2, dataProvider = "loginData")
+    @Severity(SeverityLevel.BLOCKER)
     public void incorrectLogin(User user, String errorMsg) {
         System.out.println("LoginTest.IncorrectLogin running in thread: " + Thread.currentThread().getId());
 
