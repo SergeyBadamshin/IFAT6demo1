@@ -14,7 +14,7 @@ public class PropertyReader {
     }
 
     private static String getCorrectPath() {
-        if (propertiesPath.charAt(0) != '/' ) {
+        if (propertiesPath.charAt(0) != '/') {
             propertiesPath = "/" + propertiesPath;
         }
         return propertiesPath;
