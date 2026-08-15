@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import user.User;
 import user.UserFactory;
 
+import static enums.ErrorMessage.*;
 import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -30,12 +31,12 @@ public class LoginTest extends BaseTest {
     @DataProvider()
     public Object[][] loginData() {
         return new Object[][]{
-                {UserFactory.withIncorrectUsername(), "Epic sadface: Username and password do not match any user in this service"},
-                {UserFactory.withIncorrectPassword(), "Epic sadface: Username and password do not match any user in this service"},
-                {UserFactory.withLockedAdminPermission(), "Epic sadface: Sorry, this user has been locked out."},
-                {new User("","secret_sauce"), "Epic sadface: Username is required"},
-                {new User("standard_user",""), "Epic sadface: Password is required"},
-                {new User("",""), "Epic sadface: Username is required"}
+                {UserFactory.withIncorrectUsername(), ERROR_WRONG_INPUT.getMessage()},
+                {UserFactory.withIncorrectPassword(), ERROR_WRONG_INPUT.getMessage()},
+                {UserFactory.withLockedAdminPermission(), ERROR_LOCKED_USER.getMessage()},
+                {new User("","secret_sauce"), ERROR_USER_REQUIRED.getMessage()},
+                {new User("standard_user",""), ERROR_PASSWORD_REQUIRED.getMessage()},
+                {new User("",""), ERROR_USER_REQUIRED.getMessage()}
         };
     }
 

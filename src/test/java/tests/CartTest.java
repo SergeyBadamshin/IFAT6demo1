@@ -8,8 +8,7 @@ import user.UserFactory;
 
 import java.util.List;
 
-import static enums.TitleNaming.CART;
-import static enums.TitleNaming.PRODUCTS;
+import static enums.TitleNaming.*;
 import static org.testng.Assert.*;
 
 @Epic("Интернет-магазин")
@@ -40,5 +39,8 @@ public class CartTest extends BaseTest {
         assertEquals(cartPage.getProductsNames().size(), 3);
         assertTrue(cartPage.getProductsNames().contains("Sauce Labs Bolt T-Shirt"));
         assertEquals(cartPage.getProductsNames(), goodsList);
+        cartPage.clickCheckout();
+        assertEquals(productsPage.getNamePage(), CHECKOUT.getDisplayName(),
+                "Name of the page doesn't correspond to the expected");
     }
 }

@@ -9,9 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import pages.CartPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
 import utils.TestListener;
 
 @Listeners({AllureTestNg.class, TestListener.class})
@@ -20,6 +18,8 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
     CartPage cartPage;
+    CheckoutPage checkoutPage;
+    OverviewPage overviewPage;
 
     @Parameters({"browser"})
     @BeforeMethod
@@ -29,7 +29,7 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--guest");
             options.addArguments("start-maximized");
-            options.addArguments("--headless=new");
+//            options.addArguments("--headless=new");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
@@ -42,11 +42,13 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
+        checkoutPage = new CheckoutPage(driver);
+        overviewPage = new OverviewPage(driver);
     }
 
     @Step("Закрытие браузера")
     @AfterMethod(alwaysRun = true)
     public void close() {
-        driver.quit();
+//        driver.quit();
     }
 }
