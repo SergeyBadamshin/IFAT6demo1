@@ -1,13 +1,18 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import user.UserFactory;
 
 import java.util.List;
 
+import static enums.TitleNaming.PRODUCTS;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
+@Epic("Интернет-магазин")
+@Feature("Страница товаров")
 public class ProductsTest extends BaseTest {
 
     List<String> goodsList =
@@ -15,11 +20,15 @@ public class ProductsTest extends BaseTest {
                     "Sauce Labs Bike Light",
                     "Sauce Labs Bolt T-Shirt");
 
+    @Story("Проверка отображения индикатора корзины после добавления товаров")
     @Test
     public void checkGoodsAdded() {
+        System.out.println("ProductsTest.checkGoodsAdded running in thread: " + Thread.currentThread().getId());
+
         loginPage.open();
         loginPage.login(UserFactory.withAdminPermission());
-        assertTrue(productsPage.pageIsOpen(), "Страница Products не открылась");
+        assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
+                "Name of the page doesn't correspond to the expected");
         productsPage.addToCart(0);
         for (String goodName : goodsList) {
             productsPage.addToCart(goodName);
