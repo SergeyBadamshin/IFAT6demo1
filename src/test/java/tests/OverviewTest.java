@@ -11,7 +11,7 @@ import static enums.ProductsNaming.*;
 import static enums.TitleNaming.*;
 
 public class OverviewTest extends BaseTest {
-    List<String> GoodsInCart =
+    List<String> goodsInCart =
             List.of(BACKPACK.getProductName(),
                     BIKE_LIGHT.getProductName(),
                     BOLT_T_SHIRT.getProductName());
@@ -24,7 +24,7 @@ public class OverviewTest extends BaseTest {
         loginPage.login(UserFactory.withAdminPermission());
         softAssert.assertEquals(productsPage.getNamePage(), PRODUCTS.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
-        for (String goodName : GoodsInCart) {
+        for (String goodName : goodsInCart) {
             productsPage.addToCart(goodName);
         }
         productsPage.switchToCart();
@@ -32,7 +32,7 @@ public class OverviewTest extends BaseTest {
                 "Name of the page doesn't correspond to the expected");
 
         softAssert.assertEquals(cartPage.getProductsNames().size(), 3);
-        softAssert.assertEquals(cartPage.getProductsNames(), GoodsInCart);
+        softAssert.assertEquals(cartPage.getProductsNames(), goodsInCart);
         cartPage.clickCheckout();
         softAssert.assertEquals(productsPage.getNamePage(), CHECKOUT.getDisplayName(),
                 "Name of the page doesn't correspond to the expected");
@@ -41,7 +41,7 @@ public class OverviewTest extends BaseTest {
                 "Name of the page doesn't correspond to the expected");
         softAssert.assertEquals(
                 overviewPage.getProductsNames(),
-                GoodsInCart,
+                goodsInCart,
                 "Products in checkout don't correspond to added products");
         softAssert.assertEquals(
                 overviewPage.getItemTotal(),
@@ -55,4 +55,3 @@ public class OverviewTest extends BaseTest {
         softAssert.assertAll();
     }
 }
-

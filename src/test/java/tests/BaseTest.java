@@ -12,6 +12,8 @@ import org.testng.annotations.*;
 import pages.*;
 import utils.TestListener;
 
+import java.time.Duration;
+
 @Listeners({AllureTestNg.class, TestListener.class})
 public class BaseTest {
     public WebDriver driver;
@@ -29,7 +31,7 @@ public class BaseTest {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--guest");
             options.addArguments("start-maximized");
-//            options.addArguments("--headless=new");
+            options.addArguments("--headless=new");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
@@ -38,6 +40,7 @@ public class BaseTest {
             throw new IllegalArgumentException("Unsupported browser: " + browser);
         }
 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         context.setAttribute("driver", driver);
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
@@ -49,6 +52,6 @@ public class BaseTest {
     @Step("Закрытие браузера")
     @AfterMethod(alwaysRun = true)
     public void close() {
-//        driver.quit();
+        driver.quit();
     }
 }

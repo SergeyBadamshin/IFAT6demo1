@@ -57,4 +57,3 @@ public class OverviewPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(finishBtn)).click();
     }
 }
-

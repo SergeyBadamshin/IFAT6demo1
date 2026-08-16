@@ -12,5 +12,4 @@ public enum ErrorMessage {
     ERROR_PASSWORD_REQUIRED("Epic sadface: Password is required");
 
     private final String message;
-
 }

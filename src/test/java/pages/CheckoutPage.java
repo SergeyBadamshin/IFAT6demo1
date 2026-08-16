@@ -4,10 +4,6 @@ import checkoutuser.CheckoutUser;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import tests.BaseTest;
-
-import static pages.BasePage.DATA_TEST_PATTERN;
-
 
 public class CheckoutPage extends BasePage {
     private final By firstNameInput = By.cssSelector(DATA_TEST_PATTERN.formatted("firstName"));
@@ -27,4 +23,3 @@ public class CheckoutPage extends BasePage {
         driver.findElement(continueBtn).click();
     }
 }
-
